@@ -3,8 +3,8 @@
     "source": "functions",
     "runtime": "nodejs20",
     "predeploy": [
-      "npm run build",
-      "npm run build:functions"
+      "npm --prefix functions install",
+      "npm --prefix functions run build"
     ]
   },
   "hosting": {
@@ -15,6 +15,9 @@
       "**/node_modules/**"
     ],
     "cleanUrls": true,
+    "predeploy": [
+      "npm run build:web"
+    ],
     "rewrites": [
       {
         "source": "/_next/static/(.*)",

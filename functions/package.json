@@ -2,10 +2,15 @@
   "name": "neoncheck-functions",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "20"
+  },
   "main": "lib/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npm run build:next && tsc",
+    "build:next": "npm --prefix .. run build:web",
     "lint": "eslint src --ext .ts",
+    "serve": "firebase emulators:start --only functions,firestore",
     "deploy": "firebase deploy --only functions"
   },
   "dependencies": {

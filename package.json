@@ -2,9 +2,14 @@
   "name": "neoncheck-ai",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node scripts/sync-next-build.mjs",
+    "build": "npm run build:web",
+    "build:web": "next build && node scripts/sync-next-build.mjs",
+    "sync": "node scripts/sync-next-build.mjs",
     "start": "next start",
     "lint": "next lint",
     "build:functions": "npm --prefix functions run build",
