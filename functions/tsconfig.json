@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "strict": true,
-    "types": ["node"]
+    "types": ["node", "firebase-admin"]
   },
   "include": ["src"]
 }
