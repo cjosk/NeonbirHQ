@@ -6,16 +6,17 @@ NeonCheck AI is a SaaS platform tailored for **Neonbirr.com** that unifies SEO h
 
 ```
 .
-├── web/                 # Next.js 14 App Router frontend with Tailwind + Framer Motion
-├── functions/           # Firebase Functions (Node.js 20) for crawlers, schedulers, and messaging
+├── src/                # Next.js 14 App Router frontend with Tailwind + Framer Motion
+├── public/             # Static assets served by Next.js / Firebase Hosting
+├── functions/          # Firebase Functions (Node.js 20) for crawlers, schedulers, and messaging
 ├── services/
 │   └── nlp/            # FastAPI microservice for sentiment + AI recommendations
-├── firestore.rules      # Firestore security rules scoped per-user
-├── firebase.json        # Firebase Hosting + Functions configuration
-└── .firebaserc          # Default Firebase project alias
+├── firestore.rules     # Firestore security rules scoped per-user
+├── firebase.json       # Firebase Hosting + Functions configuration
+└── .firebaserc         # Default Firebase project alias
 ```
 
-### Frontend (web)
+### Frontend (Next.js)
 - **Realtime dashboard** showing SEO, speed, reputation, and engagement scores.
 - Hooks for **Firestore listeners** using Firebase Web SDK.
 - Components built with **TailwindCSS**, **Framer Motion**, and **Chart.js** visualizations.
@@ -32,10 +33,11 @@ NeonCheck AI is a SaaS platform tailored for **Neonbirr.com** that unifies SEO h
 - Designed for deployment on **Google Cloud Run** with Poetry-based dependency management.
 
 ## Local Development
-1. Install dependencies inside each package (`web`, `functions`, `services/nlp`).
+1. Install dependencies once: `npm install` (root) and `npm --prefix functions install`.
 2. Use the [Firebase Emulator Suite](https://firebase.google.com/docs/emulator-suite) to run Functions + Firestore locally.
-3. Set environment variables using `.env` files (see `web/.env.example`).
+3. Set environment variables using `.env` files (see `.env.example`).
 4. Launch the FastAPI service with `uvicorn app.main:app --reload --port 8000`.
+5. Start the Next.js app with `npm run dev`.
 
 ## Deployment Overview
 - **Firebase Hosting** serves the Next.js build with SSR proxied through the `nextApp` function.
@@ -43,8 +45,8 @@ NeonCheck AI is a SaaS platform tailored for **Neonbirr.com** that unifies SEO h
 - **Google Cloud Run** hosts the Python NLP container.
 
 ## Build & Deploy Workflow
-1. Install dependencies once: `npm --prefix web install` and `npm --prefix functions install`.
-2. Build the web app and sync the assets into the Firebase Functions bundle with `npm run build` (runs `next build`, copies `.next` + `public` into `functions/`, then compiles TypeScript).
-3. Deploy everything with `firebase deploy`. The `firebase.json` predeploy hook repeats the build/sync/compile steps so Hosting always points rewrites at the latest Next.js output.
+1. Build the Next.js app and sync the assets into the Firebase Functions bundle with `npm run build` (runs `next build`, copies `.next` + `public` into `functions/`).
+2. Compile TypeScript Cloud Functions with `npm run build:functions`.
+3. Deploy everything with `firebase deploy`. The `firebase.json` predeploy hook runs the two build steps automatically so Hosting always points rewrites at the latest Next.js output and Functions ship compiled JavaScript.
 
 This repository delivers a production-ready foundation to expand each module with deeper integrations such as full SERP analytics, robust scraping pipelines, and advanced AI insights.

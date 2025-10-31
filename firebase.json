@@ -3,9 +3,8 @@
     "source": "functions",
     "runtime": "nodejs20",
     "predeploy": [
-      "npm --prefix web run build",
-      "node scripts/sync-next-build.mjs",
-      "npm --prefix functions run build"
+      "npm run build",
+      "npm run build:functions"
     ]
   },
   "hosting": {

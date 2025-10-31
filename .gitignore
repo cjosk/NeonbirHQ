@@ -1,8 +1,8 @@
 node_modules/
 .next/
 .out/
-web/.env.local
-web/.env
+.env.local
+.env
 functions/lib/
 functions/node_modules/
 functions/.next/
