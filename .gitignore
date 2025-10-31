@@ -1,0 +1,10 @@
+node_modules/
+.next/
+.out/
+web/.env.local
+web/.env
+functions/lib/
+functions/node_modules/
+services/nlp/.venv/
+services/nlp/__pycache__/
+.DS_Store
