@@ -42,4 +42,9 @@ NeonCheck AI is a SaaS platform tailored for **Neonbirr.com** that unifies SEO h
 - **Firebase Scheduler** triggers the cron-based audits and weekly reports.
 - **Google Cloud Run** hosts the Python NLP container.
 
+## Build & Deploy Workflow
+1. Install dependencies once: `npm --prefix web install` and `npm --prefix functions install`.
+2. Build the web app and sync the assets into the Firebase Functions bundle with `npm run build` (runs `next build`, copies `.next` + `public` into `functions/`, then compiles TypeScript).
+3. Deploy everything with `firebase deploy`. The `firebase.json` predeploy hook repeats the build/sync/compile steps so Hosting always points rewrites at the latest Next.js output.
+
 This repository delivers a production-ready foundation to expand each module with deeper integrations such as full SERP analytics, robust scraping pipelines, and advanced AI insights.

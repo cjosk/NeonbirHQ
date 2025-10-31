@@ -1,0 +1,7 @@
+{
+  "name": "neoncheck-ai",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix web run build && node scripts/sync-next-build.mjs && npm --prefix functions run build"
+  }
+}

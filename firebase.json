@@ -1,13 +1,35 @@
 {
-  "hosting": {
-    "public": "web/out",
-    "rewrites": [
-      { "source": "**", "function": "nextApp" }
-    ]
-  },
   "functions": {
     "source": "functions",
-    "runtime": "nodejs20"
+    "runtime": "nodejs20",
+    "predeploy": [
+      "npm --prefix web run build",
+      "node scripts/sync-next-build.mjs",
+      "npm --prefix functions run build"
+    ]
+  },
+  "hosting": {
+    "public": "functions/public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "cleanUrls": true,
+    "rewrites": [
+      {
+        "source": "/_next/static/(.*)",
+        "function": "nextApp"
+      },
+      {
+        "source": "/_next/image(.*)",
+        "function": "nextApp"
+      },
+      {
+        "source": "**",
+        "function": "nextApp"
+      }
+    ]
   },
   "emulators": {
     "functions": {

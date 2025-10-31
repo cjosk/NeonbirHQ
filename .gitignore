@@ -5,6 +5,9 @@ web/.env.local
 web/.env
 functions/lib/
 functions/node_modules/
+functions/.next/
+functions/public/*
+!functions/public/.gitkeep
 services/nlp/.venv/
 services/nlp/__pycache__/
 .DS_Store
