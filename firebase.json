@@ -1,0 +1,47 @@
+{
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs20",
+    "predeploy": [
+      "npm --prefix functions install",
+      "npm --prefix functions run build"
+    ]
+  },
+  "hosting": {
+    "public": "functions/public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "cleanUrls": true,
+    "predeploy": [
+      "npm run build:web"
+    ],
+    "rewrites": [
+      {
+        "source": "/_next/static/(.*)",
+        "function": "nextApp"
+      },
+      {
+        "source": "/_next/image(.*)",
+        "function": "nextApp"
+      },
+      {
+        "source": "**",
+        "function": "nextApp"
+      }
+    ]
+  },
+  "emulators": {
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "hosting": {
+      "port": 5000
+    }
+  }
+}
